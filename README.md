@@ -10,7 +10,11 @@ Was wird benötigt:
 
 <code>
  - VC20, hier mit einer RAM-Erweiterung, abhängig von den zu ladenden Programmen 24k
+</code>
+<code>
  - WiC64, vollständig eingerichtet (SSID, Password), hier keine Einrichtung möglich
+</code>
+<code>
  - WiC64 mit der aktuellsten Firmware und dem Patch (s. unten) 
 </code>
 
