@@ -4,6 +4,22 @@
   <img src="WiC64.png">
 </p>
 
+UPDATE 16.11.2021:
+
+ VC20-Kernal-Patch: Quellcode und Image des neuen Kernal bereitgestellt
+        F1: Start.prg vom Server laden  -> Menü 
+        F3: RUN
+        F5: DIR.PRG <- Demo vom C64, hier nicht lauffähig
+        F7: RUN
+
+
+<p align="center">
+  <img src="WiC20-Kernal.png">
+</p>
+
+
+----------------------------------------------------------------
+
 Just a proof-of-concept, now it's up to YOU
 
 Was wird benötigt:
