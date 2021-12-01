@@ -73,7 +73,8 @@ KeyNumber = $A6
 
 
 *=$e000
-!bin "code/kernal.901486-07.bin"
+!bin "code/kernal.901486-07.bin"       ; PAL
+;!bin "code/kernal.901486-06.bin"        ; NTSC
 
 
 *=$edf3     ; new colors, light blue bckgnd, white border
