@@ -4,6 +4,22 @@
   <img src="WiC64.png">
 </p>
 
+UPDATE 04.12.2021:
+
+  Neues Programm zum Verwalten des WiC20/WiC64 :
+     Anzeige der IP-Adresse
+     Anzeige der SSID des WLAN
+     Anzeige der Firmwareversion / -Datum
+  NEU !!!
+     Alle Updatemöglichkeiten DIREKT auf dem VC20 möglich
+
+
+<p align="center">
+  <img src="WiC20infoupdate.gif">
+</p>
+
+
+
 UPDATE 16.11.2021:
 
  VC20-Kernal-Patch: Quellcode und Image des neuen Kernal bereitgestellt
