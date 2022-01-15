@@ -25,11 +25,17 @@ ERGÄNZUNG 15.1.2022: -> vic20-scanconfig
 UPDATE 04.12.2021:
 
   Neues Programm zum Verwalten des WiC20/WiC64 :
+
      Anzeige der IP-Adresse
+
      Anzeige der SSID des WLAN
+
      Anzeige der Firmwareversion / -Datum
+
   NEU !!!
+
      Alle Updatemöglichkeiten DIREKT auf dem VC20 möglich
+
 
 
 <p align="center">
@@ -41,10 +47,15 @@ UPDATE 04.12.2021:
 UPDATE 16.11.2021:
 
  VC20-Kernal-Patch: Quellcode und Image des neuen Kernal bereitgestellt
+
         F1: Start.prg vom Server laden  -> Menü 
+
         F3: RUN
+
         F5: DIR.PRG <- Demo vom C64, hier nicht lauffähig
+
         F7: RUN
+
 
 
 <p align="center">
