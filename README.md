@@ -7,10 +7,15 @@
 ERGÄNZUNG 15.1.2022: -> vic20-scanconfig
 
   Neues Programm zur WLAN-Konfiguration des WiC20/WiC64 :
+
      Scannen / Anzeige der SSID aller WLANs
+
      Eingabe des WLAN-Passwortes
+
      Rückgabe der IP bei Erfolg 
+
      Wiederholen oder ab ins Hauptmenü
+
 
 <p align="center">
   <img src="vic20-scanconfig/WiC20-scanconfig.gif">
