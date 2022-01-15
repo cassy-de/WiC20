@@ -13,7 +13,7 @@ ERGÄNZUNG 15.1.2022: -> vic20-scanconfig
      Wiederholen oder ab ins Hauptmenü
 
 <p align="center">
-  <img src="vic20-scanconfig/WiC20scanconfig.gif">
+  <img src="vic20-scanconfig/WiC20-scanconfig.gif">
 </p>
 
 

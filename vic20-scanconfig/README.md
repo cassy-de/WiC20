@@ -8,7 +8,7 @@
      Wiederholen oder ab ins Hauptmenü
 
 <p align="center">
-  <img src="vic20-scanconfig/WiC20scanconfig.gif">
+  <img src="WiC20-scanconfig.gif">
 </p>
 
 
