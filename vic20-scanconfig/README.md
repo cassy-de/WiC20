@@ -14,9 +14,9 @@ ERGÄNZUNG 15.1.2022: -> vic20-scanconfig
 
 
 <p align="center">
-  <img src="WiC20-scanconfig-1.png">
-  <img src="WiC20-scanconfig-2.png">
-  <img src="WiC20-scanconfig.gif">
+  <img src="i/WiC20-scanconfig-1.png">
+  <img src="i/WiC20-scanconfig-2.png">
+  <img src="i/WiC20-scanconfig.gif">
 </p>
 
 ----------------------------------------------------------------
