@@ -309,8 +309,8 @@ read_0334_end
 com_jmp		!by <com_loadt, >com_loadt, <com_loadm, >com_loadm
 
 com_loadt	!text "W",$04,$00,21		; get NTP time from WiC64
-com_loadm	!text "W",$2B,$00,$01
-			!text "http://www.chris-straessle.de/start.prg",0 
+com_loadm	!text "W",$22,$00,$01
+			!text "https://straessle.eu/start.prg",0 
 
 
 ;			!by <com_load2, >com_load2, <com_load3, >com_load3
@@ -325,41 +325,41 @@ com_loadm	!text "W",$2B,$00,$01
 ;menu_load0	!text "gAMES      16K",0
 ;desc_load0	!text "sPIELE MIN 16K ram",18,31,32,32,146,30,"      eRWEITERUNG",0
 ;com_load0	!text "W",$3A,$00,$01
-;			!text "http://www.chris-straessle.de/files/games16k/start.prg",0 
+;			!text "https://straessle.eu/files/games16k/start.prg",0 
 ;
 ;menu_load1	!text "gAMES      32K",0
 ;desc_load1	!text "sPIELE MIT        ",18,31,32,32,146,30,"   ram vOLLAUSBAU",0
 ;com_load1	!text "W",$3A,$00,$01
-;			!text "http://www.chris-straessle.de/files/games32k/start.prg",0 
+;			!text "https://straessle.eu/files/games32k/start.prg",0 
 ;
 ;menu_load2	!text "dEMOS      8K",0
 ;desc_load2	!text "dEMO-pROGRAMME    ",18,31,32,32,146,30,"   revision ETC. ",0
 ;com_load2	!text "W",$3A,$00,$01
-;			!text "http://www.chris-straessle.de/files/demos08k/start.prg",0 
+;			!text "https://straessle.eu/files/demos08k/start.prg",0 
 ;
 ;menu_load3	!text "aUDIO      16K",0
 ;desc_load3	!text "sid-eMULATION     ",18,31,32,32,146,30," aUDIO victRACKER",0
 ;com_load3	!text "W",$3A,$00,$01
-;			!text "http://www.chris-straessle.de/files/audio16k/start.prg",0 
+;			!text "https://straessle.eu/files/audio16k/start.prg",0 
 ;
 ;menu_load4	!text "gRAPHICS   8K",0
 ;desc_load4	!text "gRAFIK-dEMOS      ",18,31,32,32,146,30," pIXEL-aRT hIrES ",0
 ;com_load4	!text "W",$3A,$00,$01
-;			!text "http://www.chris-straessle.de/files/graph08k/start.prg",0 
+;			!text "https://straessle.eu/files/graph08k/start.prg",0 
 ;
 ;menu_load5	!text "tOOLS FUER vc20 8k",0
 ;desc_load5	!text "rEADER, cLOCKS ...",18,31,32,32,146,30," NOCH IM aUFBAU  ",0
 ;com_load5	!text "W",$2B,$00,$01
-;			!text "http://www.chris-straessle.de/start.prg",0 
+;			!text "https://straessle.eu/start.prg",0 
 ;
 ;menu_load6	!text "res - cHAT",0
 ;desc_load6	!text "cHAT rOOM wIc64   ",18,31,32,32,146,30," NOCH NICHT ready",0
 ;com_load6	!text "W",$2B,$00,$01
-;			!text "http://www.chris-straessle.de/start.prg",0 
+;			!text "https://straessle.eu/start.prg",0 
 ;
 ;menu_load7	!text "res - mESSAGES",0
 ;desc_load7	!text "nACHRICHTEN       ",18,31,32,32,146,30," NOCH NICHT ready",0
 ;com_load7	!text "W",$2B,$00,$01
-;			!text "http://www.chris-straessle.de/start.prg",0 
+;			!text "https://straessle.eu/start.prg",0 
 ;
 ;

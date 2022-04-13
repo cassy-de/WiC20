@@ -4,6 +4,20 @@
   <img src="WiC64.png">
 </p>
 
+Änderung 12.4.2022: -> neue URL des Servers geändert
+
+  Nach der Umstellung des WEB-SERVERS auf HTTPS <- SECURE:
+
+     Alle PRG's neu kompiliert 
+
+     Neue START.PRG kompiliert
+
+     Neue Domain: https://straessle.eu/start.prg
+
+
+
+
+
 ERGÄNZUNG 15.1.2022: -> vic20-scanconfig
 
   Neues Programm zur WLAN-Konfiguration des WiC20/WiC64 :

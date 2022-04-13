@@ -487,6 +487,6 @@ com_load0	!text "W",$04,$00,$0C		; scan for WiFi networks
 com_load1	!text "W",$04,$00,$06		; get IP from WiC64
 com_load2	!text "W",$04,$00,$0D		; set SSID  - Password
 buffer:     !byte 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
-com_loadm	!text "W",$2B,$00,$01
-			!text "http://www.chris-straessle.de/start.prg",0 
+com_loadm	!text "W",$22,$00,$01
+			!text "https://straessle.eu/start.prg",0 
 

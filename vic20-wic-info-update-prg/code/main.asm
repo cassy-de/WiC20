@@ -507,6 +507,6 @@ com_load5	!text "W",$04,$00,$03		; perform FW update STANDARD
 com_load6	!text "W",$04,$00,$04		; perform FW update DEVELOPER
 com_load7	!text "W",$04,$00,$05		; perform FW update DEVELOPER SPECIAL
 com_load8	!text "W",$04,$00,$00		; get FW version from WiC64
-com_loadm	!text "W",$2B,$00,$01
-			!text "http://www.chris-straessle.de/start.prg",0 
+com_loadm	!text "W",$22,$00,$01
+			!text "https://straessle.eu/start.prg",0 
 

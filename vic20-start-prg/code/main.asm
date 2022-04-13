@@ -5,7 +5,8 @@
 ;    V V    i   C          22   0   0 
 ;     V     i    CCCC    22222   000
 ;
-
+		xmascol		= $9E
+		joystick	= $9F 
 		selected	= $a4
 		row			= $a5
 
@@ -37,7 +38,7 @@ eob		!by $00, $00	; The next BASIC line would start here
 		LDA #<text0
 		LDY #>text0
 		JSR $CB1E
-		LDX #20			; X+1 rows down
+		LDX #21			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR $E50C		; cursor pos X Y
 		LDA #<text1
@@ -56,64 +57,100 @@ menu_a	LDX #4			; X+1 rows down
 		LDY #>menu_load0
 		JSR printm3
 
-		LDX #6			; X+1 rows down
+		LDX #5			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load1
 		LDY #>menu_load1
 		JSR printm3
 
-		LDX #8			; X+1 rows down
+		LDX #6			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load2
 		LDY #>menu_load2
 		JSR printm3
 
-		LDX #10			; X+1 rows down
+		LDX #8			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load3
 		LDY #>menu_load3
 		JSR printm3
 
-		LDX #12			; X+1 rows down
+		LDX #9			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load4
 		LDY #>menu_load4
 		JSR printm3
 
-		LDX #14			; X+1 rows down
+		LDX #11			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load5
 		LDY #>menu_load5
 		JSR printm3
 
-		LDX #16			; X+1 rows down
+		LDX #13			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load6
 		LDY #>menu_load6
 		JSR printm3
 
-		LDX #18			; X+1 rows down
+		LDX #15			; X+1 rows down
 		LDY #$00		; y+1 cols right
 		JSR printm1
 		LDA #<menu_load7
 		LDY #>menu_load7
 		JSR printm3
 
-		LDX #21			; X+1 rows down
-		LDY #$03		; y+1 cols right
+		LDX #17			; X+1 rows down
+		LDY #$00		; y+1 cols right
 		JSR printm1
+		LDA #<menu_load8
+		LDY #>menu_load8
+		JSR printm3
+
+		LDX #19			; X+1 rows down
+		LDY #$00		; y+1 cols right
+		JSR printm1
+		LDA #<menu_load9
+		LDY #>menu_load9
+		JSR printm3
+
+		LDX #21			; X+1 rows down
+		LDY #$01		; y+1 cols right
+		JSR $E50C		; cursor pos X Y
 		LDA selected
 		ASL
 		TAX
 		LDA desc_jmp,X
 		LDY desc_jmp+1,X
-		JSR printm3
+		JSR $CB1E
+		LDA #$06
+		STA $95F9
+		LDA #$A0
+		STA $11F9
+
+; ---XMAS ----------------------------------
+;xmas	LDX #$15
+;-		LDA #$7F
+;		STA $1042,X
+;		DEX
+;		BNE -
+; ---XMAS ----------------------------------
+
+; ---Ghosts ----------------------------------
+;		LDX #$15
+;-		LDA #$7E		; Ghost shape from font
+;		STA $1042,X
+;		LDA #$01		; white
+;		STA $9442,X
+;		DEX
+;		BPL -
+; ---Ghosts ----------------------------------
 
 ;	ldx #$00
 ;-	txa
@@ -125,26 +162,92 @@ menu_a	LDX #4			; X+1 rows down
 
 getkey	LDA $CB 			; get key, $40 no key pressed
 		CMP #$40
-		BEQ getkey
+		BEQ getjoy
 		CMP #$1F 			; Cursor up / down
 		BEQ getcrsr
 		CMP #$0F 			; Return
 		BEQ getret
-		jmp getkey
 
+getjoy	LDA $9111			; VIA #1 joystick bit 2..5 - up, down, left, fire
+		AND #%00111100		; mask bit 2..5
+		STA joystick
+		LDA $9120			; VIA #2 joystick bit 7 - right
+		AND #%10000000		; mask bit 7
+		ORA joystick		; combine both results
+		AND #%10111100		; only joystick bits are relevant
+		CMP #%10011100		; fire?
+		BEQ getret
+		CMP #%10110100		; down?
+		BEQ getcri
+		CMP #%10111000		; up?
+		BEQ getcrd
+
+; ---XMAS ----------------------------------
+;xmascolor
+;		LDA $A1			; TI$ 
+;		STA xmascol
+;		LDA $A2			; TI$
+;		ROL				; MSB -> Carry
+;		ROL
+;		ROL
+;		ROL xmascol		; Carry -> Color
+;		LDX #$15
+;-		TXA 
+;		CLC
+;		ADC xmascol 
+;		AND #$07
+;		STA $9442,X
+;		DEX
+;		BNE -
+; ---XMAS ----------------------------------
+
+; pacman animation 
+		LDA $A2			; TI$
+		LSR 
+		LSR 
+		LSR 
+		AND #$0F
+		TAX 
+		LDA #$7E		; Ghost shape from font
+		STA $1045,X
+		LDA #$01		; white
+		STA $9445,X
+						; clear previous char
+		LDA #$20		; 
+		STA $1044,X
+		LDA #$00		; 
+		STA $9444,X
+						
+		LDA #$7D		;	pacman 
+		STA $1043,X
+		LDA #$07		; yellow
+		STA $9443,X
+						; clear previous char
+		LDA #$20		;	 
+		STA $1042,X
+		LDA #$00		; 
+		STA $9442,X
+
+		CPX #$0F
+		BNE +
+		LDA #$20
+		STA $1043,X 
+		STA $1045,X 
++
+		JMP getkey			; go back to read keyboard		
 
 getcrsr	
 		LDA $028E 
 		BEQ getcri
-		LDX selected
+getcrd	LDX selected
 		DEX
 		BPL +
-		LDX #$07
+		LDX #$09
 +		STX selected
 		JMP menu_0 
 getcri	LDX selected
 		INX
-		CPX #$08
+		CPX #$0A
 		BNE +
 		LDX #$00
 +		STX selected
@@ -216,13 +319,15 @@ sound3	LDX #225
 
 text0	
 		!by 31,18,232,233,233,233,233,233,233,234,32,32,32,32,32,32,32,32,32,32,220,221,222,223
+; ---XMAS ----------------------------------
+;		!by 31,18,232,233,233,233,233,233,233,234,32,"x","m","a","s",32,32,32,32,32,220,221,222,223
 		!by 31,224,156,225,159,226,227,228,158,229,230,31,231,32,32,32,"h","A","U","P","T","M","E","N","U","E",32
 		!by 31,235,236,236,236,236,236,236,237,32,32,32,32,32,32,32,32,32,32,32,32,32,239,146
 		!by 30,$00
 
 text1
-		!by 31,231,232,234,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219,219
-		!by 31,18,32,32,146,237,0
+		!by 31,18,238,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32
+		!by 32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,32,146,0
 
 text_ha	!by 158,18,240
 		!by $00
@@ -432,49 +537,61 @@ com_jmp		!by <com_load0, >com_load0, <com_load1, >com_load1
 			!by <com_load2, >com_load2, <com_load3, >com_load3
 			!by <com_load4, >com_load4, <com_load5, >com_load5
 			!by <com_load6, >com_load6, <com_load7, >com_load7
+			!by <com_load8, >com_load8, <com_load9, >com_load9
 
 desc_jmp	!by <desc_load0, >desc_load0, <desc_load1, >desc_load1
 			!by <desc_load2, >desc_load2, <desc_load3, >desc_load3
 			!by <desc_load4, >desc_load4, <desc_load5, >desc_load5
 			!by <desc_load6, >desc_load6, <desc_load7, >desc_load7
+			!by <desc_load8, >desc_load8, <desc_load9, >desc_load9
 
-menu_load0	!text "gAMES      16K",0
-desc_load0	!text "sPIELE 16K+    ram",18,31,32,32,146,30,"      eRWEITERUNG",0
-com_load0	!text "W",$3A,$00,$01
-			!text "http://www.chris-straessle.de/files/games16k/start.prg",0 
+menu_load0	!text "gAMES      0K & 3K",0
+desc_load0	!text 18,31,"sPIELE ohne/3K ram    eRWEITERUNG         ",146,30,0
+com_load0	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/games03k/start.prg",0 
 
-menu_load1	!text "gAMES      32K",0
-desc_load1	!text "sPIELE MIT        ",18,31,32,32,146,30,"   ram vOLLAUSBAU",0
-com_load1	!text "W",$3A,$00,$01
-			!text "http://www.chris-straessle.de/files/games32k/start.prg",0 
+menu_load1	!text "gAMES      16K",0
+desc_load1	!text 18,31,"sPIELE 16K+    ram    eRWEITERUNG         ",146,30,0
+com_load1	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/games16k/start.prg",0 
 
-menu_load2	!text "dEMOS      8K",0
-desc_load2	!text "dEMO-pROGRAMME    ",18,31,32,32,146,30,"   revision ETC. ",0
-com_load2	!text "W",$3A,$00,$01
-			!text "http://www.chris-straessle.de/files/demos08k/start.prg",0 
+menu_load2	!text "gAMES      32K",0
+desc_load2	!text 18,31,"sPIELE MIT ram vOLL-  AUSBAU              ",146,30,0
+com_load2	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/games32k/start.prg",0 
 
-menu_load3	!text "aUDIO      16K",0
-desc_load3	!text "sid-eMULATION     ",18,31,32,32,146,30," aUDIO victRACKER",0
-com_load3	!text "W",$3A,$00,$01
-			!text "http://www.chris-straessle.de/files/audio16k/start.prg",0 
+menu_load3	!text "dEMOS      UNEXP.",0
+desc_load3	!text 18,31,"dEMO-pROGRAMME OHNE   ram-eRWEITERUNG     ",146,30,0
+com_load3	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/demos00k/start.prg",0 
 
-menu_load4	!text "gRAPHICS   8K",0
-desc_load4	!text "gRAFIK-dEMOS      ",18,31,32,32,146,30," pIXEL-aRT hIrES ",0
-com_load4	!text "W",$3A,$00,$01
-			!text "http://www.chris-straessle.de/files/graph08k/start.prg",0 
+menu_load4	!text "dEMOS      8K",0
+desc_load4	!text 18,31,"dEMO-pROGRAMME        revision ETC.       ",146,30,0
+com_load4	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/demos08k/start.prg",0 
 
-menu_load5	!text "tOOLS FUER vc20 8k",0
-desc_load5	!text "cLOCKS, cONFIG ...",18,31,32,32,146,30," tEST-bEREICH    ",0
-com_load5	!text "W",$3A,$00,$01
-			!text "http://www.chris-straessle.de/files/tools08k/start.prg",0 
+menu_load5	!text "aUDIO      16K",0
+desc_load5	!text 18,31,"sid-eMULATION         aUDIO victRACKER    ",146,30,0
+com_load5	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/audio16k/start.prg",0 
 
-menu_load6	!text "res - cHAT",0
-desc_load6	!text "cHAT rOOM wIc64   ",18,31,32,32,146,30," NOCH NICHT ready",0
-com_load6	!text "W",$2B,$00,$01
-			!text "http://www.chris-straessle.de/start.prg",0 
+menu_load6	!text "gRAPHICS   8-24K",0
+desc_load6	!text 18,31,"gRAFIK-dEMOS          pIXEL-aRT hIrES     ",146,30,0
+com_load6	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/graph08k/start.prg",0 
 
-menu_load7	!text "res - mESSAGES",0
-desc_load7	!text "nACHRICHTEN       ",18,31,32,32,146,30," NOCH NICHT ready",0
-com_load7	!text "W",$2B,$00,$01
-			!text "http://www.chris-straessle.de/start.prg",0 
+menu_load7	!text "tOOLS      8k",0
+desc_load7	!text 18,31,"cLOCKS, cONFIG ...    tEST-bEREICH        ",146,30,0
+com_load7	!text "W",$31,$00,$01
+			!text "https://straessle.eu/files/tools08k/start.prg",0 
+
+menu_load8	!text "RESERVIERT - cHAT",0
+desc_load8	!text 18,31,"cHAT rOOM wIc64       NOCH NICHT ready    ",146,30,0
+com_load8	!text "W",$22,$00,$01
+			!text "https://straessle.eu/start.prg",0 
+
+menu_load9	!text "RESERVIERT - mESSAGE",0
+desc_load9	!text 18,31,"mESSAGES  wIc64       NOCH NICHT ready    ",146,30,0
+com_load9	!text "W",$22,$00,$01
+			!text "https://straessle.eu/start.prg",0 
 

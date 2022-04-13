@@ -409,7 +409,7 @@ IncEnd:
 FTable:                     ; Tastaturcodes von https://www.c64-wiki.de/wiki/C64-Tastaturtabelle
 !byte 0
 F1:
-!text " ",147,"L",207,34,"HTTP://WWW.CHRIS-STRAESSLE.DE/START.PRG",34,$0d
+!text " ",147,"L",207,34,"HTTPS://STRAESSLE.EU/START.PRG",34,$0d
 !byte 0
 F3:
 !text "RUN:",$0d
